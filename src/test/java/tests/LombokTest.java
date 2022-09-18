@@ -1,7 +1,6 @@
 package tests;
 
-import lombok.Support;
-import lombok.supportData;
+import models.SupportData;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -12,14 +11,14 @@ import static specs.Specs.response;
 public class LombokTest {
     @Test
     void checkSupportEmail() {
-        supportData supportData = (lombok.supportData) given()
+        SupportData supportData = (SupportData) given()
                 .spec(request)
                 .when()
                 .get("/users/2")
                 .then()
                 .spec(response)
                 .log().body()
-                .extract().as(lombok.supportData.class);
+                .extract().as(SupportData.class);
         assertEquals("https://reqres.in/#support-heading", supportData.getSupport().getURL());
     }
 }
